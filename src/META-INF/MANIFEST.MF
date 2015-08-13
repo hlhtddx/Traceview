@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Main-Class: com.android.traceview.MainWindow
+Class-Path:  org-eclipse-jface-3.6.2.jar common.jar sdkstats.jar org-e
+ clipse-core-commands-3.6.0.jar org-eclipse-equinox-common-3.6.0.jar o
+ sgi-4.0.0.jar annotations.jar guava-17.0.jar swtmenubar.jar sdklib.ja
+ r layoutlib-api.jar dvlib.jar gson-2.2.4.jar commons-compress-1.8.1.j
+ ar httpclient-4.1.1.jar httpmime-4.1.jar kxml2-2.3.0.jar annotations-
+ 12.0.jar httpcore-4.1.jar commons-logging-1.1.1.jar commons-codec-1.4
+ .jar
+
