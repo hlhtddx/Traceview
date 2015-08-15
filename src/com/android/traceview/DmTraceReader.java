@@ -233,6 +233,10 @@ public class DmTraceReader extends TraceReader {
 				threadData.mGlobalEndTime = globalTime;
 			}
 
+			//Check context switching as following conditions:
+			// 1. When no global clock, we detect thread switching by Thread Id changing
+			// 2. Otherwise, if sleeping time (elapsedGlobalTime - elapsedThreadTime) is longer than 100us, we consider it as a thread switching
+			// 3. If no thread time, context switching is skipped
 			if (haveThreadClock) {
 				long elapsedThreadTime = 0L;
 				if (!threadData.mHaveThreadTime) {
@@ -245,7 +249,7 @@ public class DmTraceReader extends TraceReader {
 				threadData.mThreadEndTime = threadTime;
 
 				if (!haveGlobalClock) {
-
+					//No global clock, check if thread id changed
 					if ((prevThreadData != null)
 							&& (prevThreadData != threadData)) {
 						Call switchCall = prevThreadData.enter(
@@ -264,7 +268,7 @@ public class DmTraceReader extends TraceReader {
 					prevThreadData = threadData;
 
 				} else {
-
+					//With global clock, check sleeping time
 					long sleepTime = elapsedGlobalTime - elapsedThreadTime;
 					if (sleepTime > 100L) {
 						Call switchCall = threadData.enter(this.mContextSwitch,

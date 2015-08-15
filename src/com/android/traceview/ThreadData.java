@@ -47,7 +47,7 @@ class ThreadData implements TimeLineView.Row {
 		if (this.mIsEmpty) {
 			this.mIsEmpty = false;
 			if (trace != null) {
-				trace.add(new TraceAction(0, this.mRootCall));
+				trace.add(new TraceAction(TraceAction.ACTION_ENTER, this.mRootCall));
 			}
 		}
 
@@ -56,7 +56,7 @@ class ThreadData implements TimeLineView.Row {
 		this.mStack.add(call);
 
 		if (trace != null) {
-			trace.add(new TraceAction(0, call));
+			trace.add(new TraceAction(TraceAction.ACTION_ENTER, call));
 		}
 
 		Integer num = (Integer) this.mStackMethods.get(method);
@@ -87,7 +87,7 @@ class ThreadData implements TimeLineView.Row {
 		this.mStack.remove(this.mStack.size() - 1);
 
 		if (trace != null) {
-			trace.add(new TraceAction(1, call));
+			trace.add(new TraceAction(TraceAction.ACTION_EXIT, call));
 		}
 
 		Integer num = (Integer) this.mStackMethods.get(method);
@@ -113,7 +113,7 @@ class ThreadData implements TimeLineView.Row {
 			call.mGlobalEndTime = this.mGlobalEndTime;
 			call.mThreadEndTime = this.mThreadEndTime;
 			if (trace != null) {
-				trace.add(new TraceAction(2, call));
+				trace.add(new TraceAction(TraceAction.ACTION_INCOMPLETE, call));
 			}
 		}
 		this.mStack.clear();

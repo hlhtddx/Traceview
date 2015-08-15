@@ -90,7 +90,7 @@ class Call implements TimeLineView.Block {
 
 	public boolean isIgnoredBlock() {
 		return (this.mCaller == null)
-				|| ((isContextSwitch()) && (this.mCaller.mCaller == null));
+				|| (isContextSwitch() && (this.mCaller.mCaller == null));
 	}
 
 	public TimeLineView.Block getParentBlock() {
